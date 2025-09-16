@@ -1,0 +1,45 @@
+[package]
+name = "picotron-wgpu"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "picotron_wgpu"
+crate-type = ["rlib", "cdylib"]
+
+# WGPU and GPU compute dependencies
+[dependencies]
+wgpu = "0.19"
+naga = "0.19"
+pollster = "0.3"
+futures-intrusive = "0.5"
+bytemuck = "1.14"
+
+# Serialization and configuration
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+
+# Logging and error handling
+log = "0.4"
+env_logger = "0.10"
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Math and utilities
+rand = "0.8"
+rand_chacha = "0.3"
+num-traits = "0.2"
+
+# Async runtime
+tokio = { version = "1.0", features = ["full"] }
+
+# Python bindings (optional)
+pyo3 = { version = "0.20", optional = true, features = ["extension-module"] }
+
+[features]
+default = []
+python = ["pyo3"]
+
+[build-dependencies]
+naga = { version = "0.19", features = ["wgsl-in", "spv-out"] }
